@@ -3,7 +3,7 @@ import { ControleLivro } from "../../../../classes/controle/ControleLivros";
 import { Livro } from "../../../../classes/modelo/Livro";
 
 
-export const controleLivro = new ControleLivro() 
+export const controleLivros = new ControleLivro() 
  
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -11,28 +11,28 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   
   const requestMethod = req.method;
 
-  const { controleLivro, codigo_livro } = JSON.parse(req.body);
+  const { livro, codigo } = JSON.parse(req.body);
 
   switch (requestMethod) {
     case "POST":
       const novoLivro = new Livro(
-        controleLivro.codigo,
-        controleLivro.editora,
-        controleLivro.titulo,
-        controleLivro.resumo,
-        controleLivro.autores
+        livro.codigo,
+        livro.editora,
+        livro.titulo,
+        livro.resumo,
+        livro.autores
       );
-      controleLivro.incluir(novoLivro);
-      res.status(200).json(controleLivro.obterLivros());
+      controleLivros.incluir(novoLivro);
+      res.status(200).json(controleLivros.obterLivros());
       break;
 
     case "DELETE":
-      controleLivro.excluir(Number(codigo_livro));
-      res.status(200).json(controleLivro.obterLivros());
+      controleLivros.excluir(Number(codigo));
+      res.status(200).json(controleLivros.obterLivros());
       break;
 
     default:
-      res.status(200).json(controleLivro.obterLivros());
+      res.status(200).json(controleLivros.obterLivros());
       break;
   }
 };

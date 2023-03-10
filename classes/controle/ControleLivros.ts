@@ -31,6 +31,12 @@ export class ControleLivro {
     return this.livros;
   }
 
+  getNomeLivro(cod: Number) {
+    return this.livros.filter((livro) => {
+      return livro.codigo === cod;
+    });
+  }
+
   incluir(receberLivro: Livro) {
     const maiorCod = this.livros.reduce((esteCod, esteLivro) => {
       return esteCod > esteLivro.codigo ? esteCod : esteLivro.codigo;
