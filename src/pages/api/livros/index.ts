@@ -17,7 +17,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
     case "POST":
       const novoLivro = new Livro(
         livro.codigo,
-        livro.editora,
+        livro.codEditora,
         livro.titulo,
         livro.resumo,
         livro.autores
