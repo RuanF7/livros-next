@@ -1,30 +1,65 @@
-import React from 'react'
-import styles from '../styles/Home.module.css'
-import livros from './api/livros';
-
-/* &&& */
-import { Livro } from '../../classes/modelo/Livro';
+import React, { useEffect, useState } from "react";
+import { Livro } from "../../classes/modelo/Livro";
+import LinhaLivro from "../../componentes/LinhaLivro";
+import Menu from "../../componentes/Menu";
 
 
+import styles from "../styles/Home.module.css";
 
-export default function LivroLista (livro: Livro) {
-  
+const baseURL = "http://localhost:3000/api/livros";
+
+export default function LivroLista() {
+  async function obter() {
+    const dados = await fetch(baseURL, {
+      method: "GET",
+    });
+
+    const retorno: Livro[] = await dados.json();
+    setMeusLivros(retorno);
+  }
+
+  const [meusLivros, setMeusLivros] = useState<Livro[]>([
+    {
+      titulo: "Inserir dados",
+      codEditora: 1,
+      codigo: 1,
+      resumo: "Inserir dados",
+      autores: ["Inserir dados"],
+    },
+  ]);
+
+  useEffect(() => {
+    obter();
+  }, []);
+
   return (
-    <div>
-      <h1>Olá Mundo</h1>     
-      <h3>{livro.codigo}</h3>
-      <h3>{livro.codEditora}</h3> 
-      <h3>{livro.titulo}</h3> 
-      <h3>{livro.resumo}</h3> 
-      <h3>{livro.autores}</h3>            
-    </div>  
+    <React.Fragment>
+      <Menu />
+
+      <main className="container">
+        <h1>Catalogo de Livros</h1>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Título</th>
+              <th scope="col">Resumo</th>
+              <th scope="col">Editora</th>
+              <th scope="col">Autores</th>
+            </tr>
+          </thead>
+          <tbody>
+            {meusLivros.map((livro) => {
+              return (
+                <LinhaLivro
+                  key={livro.codigo}
+                  livro={livro}
+                  excluir={function () {}}
+                />
+              );
+            })}
+          </tbody>
+        </table>
+      </main>
+    </React.Fragment>
   );
-}
-
-async function BuscaLivros(){
-  const retorno = await fetch('http://localhost:3000/api/livros/').catch()
-}
-
-async function ExcluirLivros(){
-  const retorno = await fetch('http://localhost:3000/api/livros/').catch()
 }
