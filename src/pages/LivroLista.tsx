@@ -20,17 +20,30 @@ export default function LivroLista() {
 
   const [meusLivros, setMeusLivros] = useState<Livro[]>([
     {
-      titulo: "Inserir dados",
-      codEditora: 1,
       codigo: 1,
+      editora: 1,
+      titulo: "Inserir dados",
       resumo: "Inserir dados",
       autores: ["Inserir dados"],
     },
   ]);
+  const [carregando, setCarregando] = useState<boolean>(false);
+
+
+  const excluirLivro = async (cod: number) => {
+    const baseURL = "http://localhost:3000/api/livros";
+    const dados = await fetch(baseURL, {
+      method: "DELETE",
+      body: JSON.stringify({ codigo_livro: cod }),
+    });
+
+    setCarregando(true);
+  };
 
   useEffect(() => {
     obter();
-  }, []);
+    setCarregando(false);
+  }, [carregando]);
 
   return (
     <React.Fragment>
@@ -53,7 +66,7 @@ export default function LivroLista() {
                 <LinhaLivro
                   key={livro.codigo}
                   livro={livro}
-                  excluir={function () {}}
+                  excluir={excluirLivro}
                 />
               );
             })}

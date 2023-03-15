@@ -1,8 +1,8 @@
 
 export class Livro {
 
-  codEditora: number;
   codigo: number;
+  editora: number;
   titulo: string;
   resumo: string;
   autores: string[];
@@ -11,14 +11,14 @@ export class Livro {
     codigo: number,
     codEditora: number,
     titulo: string,
-    autores: string[],
-    resumo: string
+    resumo: string,
+    autores: string[]
 
   ) {
     this.codigo = codigo;
-    this.codEditora = codEditora;
+    this.editora = codEditora;
     this.titulo = titulo;
-    this.autores = autores;
     this.resumo = resumo;
+    this.autores = autores;
   }
 }

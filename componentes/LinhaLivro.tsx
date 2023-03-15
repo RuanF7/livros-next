@@ -1,14 +1,30 @@
-import React from "react";
-import { ControleEditora } from "../classes/controle/ControleEditora";
+import React, { useEffect, useState } from "react";
+import { Editora } from "../classes/modelo/Editora";
 import { Livro } from "../classes/modelo/Livro";
 
 interface LinhaLivroProps {
   livro: Livro;
-  excluir: () => void;
+  excluir: (cod: number) => Promise<void>;
 }
 
 export default function LinhaLivro({ livro, excluir }: LinhaLivroProps) {
-  const editora = new ControleEditora();
+  const [editora, setEditora] = useState<string>("");
+
+  async function consultaEditora() {
+    const baseURL = "http://localhost:3000/api/editoras";
+    const dados = await fetch(baseURL, {
+      method: "GET",
+    });
+
+    const controleEditora: Editora[] = await dados.json();
+    const retorno = controleEditora.find(valor => valor.codEditora === livro.editora)
+
+    setEditora(retorno != undefined ? retorno.nome : "Sem cadastro");
+  }
+
+  useEffect(() => {
+    consultaEditora();
+  },);
 
   return (
     <React.Fragment>
@@ -19,7 +35,8 @@ export default function LinhaLivro({ livro, excluir }: LinhaLivroProps) {
             type="button"
             className="btn btn-danger btn-sm"
             onClick={() => {
-              excluir();
+              excluir(livro.codigo);
+              
               
             }}
           >
@@ -28,18 +45,18 @@ export default function LinhaLivro({ livro, excluir }: LinhaLivroProps) {
         </th>
         <td>{livro.resumo}</td>
         <td>
-          {editora.getNomeEditora(livro.codEditora).map((nomeEditora) => {
-            return nomeEditora.nome;
-          })}
+          {editora}
         </td>
         <td>
           <ul>
             {livro.autores.map((nome) => {
-              return <li key={nome}>{nome}</li>;
+              // eslint-disable-next-line react/jsx-key
+              return <li>{nome}</li>;
             })}
           </ul>
         </td>
       </tr>
     </React.Fragment>
   );
+  
 }
