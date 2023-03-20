@@ -1,5 +1,8 @@
 import { Editora } from '../modelo/Editora';
 
+/*
+Controle de editoras para análise do código e recebimento do nome
+*/
 export class ControleEditora {
 
   editoras: Editora[] = [

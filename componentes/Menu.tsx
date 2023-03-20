@@ -1,5 +1,9 @@
 import Link from "next/link"
 
+/*
+Menu com navegação entre as páginas
+*/
+
 export default function Menu() {
 
   return (

@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Editora } from "../classes/modelo/Editora";
 import { Livro } from "../classes/modelo/Livro";
 
+/*
+Props para livro e função excluir
+*/
 interface LinhaLivroProps {
   livro: Livro;
   excluir: (cod: number) => Promise<void>;
 }
+
+/*
+Função de inclusão dos livros no catálogo pelo código de editoras e método GET
+*/
 
 export default function LinhaLivro({ livro, excluir }: LinhaLivroProps) {
   const [editora, setEditora] = useState<string>("");
@@ -26,6 +33,9 @@ export default function LinhaLivro({ livro, excluir }: LinhaLivroProps) {
     consultaEditora();
   },);
 
+/*
+Catalogo, con recebimento dos dados e botão excluir
+*/
   return (
     <React.Fragment>
       <tr>
@@ -35,9 +45,7 @@ export default function LinhaLivro({ livro, excluir }: LinhaLivroProps) {
             type="button"
             className="btn btn-danger btn-sm"
             onClick={() => {
-              excluir(livro.codigo);
-              
-              
+              excluir(livro.codigo);              
             }}
           >
             Excluir

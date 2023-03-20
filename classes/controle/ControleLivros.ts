@@ -1,5 +1,9 @@
 import { Livro } from '../modelo/Livro';
 
+
+/*
+Dados dos livros e seus respectivos codigo
+*/
 export class ControleLivro {
 
   livros: Livro[] = [
@@ -26,7 +30,9 @@ export class ControleLivro {
     }
   ];
 
-
+/*
+Receber os livros do form, adiciona-los no catálogo e função de exclusão dos livros
+*/
   obterLivros() {
     return this.livros;
   }

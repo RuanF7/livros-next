@@ -2,8 +2,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { ControleLivro } from "../../../../classes/controle/ControleLivros"; 
 import { Livro } from "../../../../classes/modelo/Livro";
 
+/*
+Controle para recebimento dos livros, POST, DELETE usando o NextApiRequest e NextApiResponse
+*/
 
-export const controleLivros = new ControleLivro() 
+export const controleLivros = new ControleLivro(); 
  
 
 // eslint-disable-next-line import/no-anonymous-default-export

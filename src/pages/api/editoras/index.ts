@@ -1,6 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ControleEditora } from "../../../../classes/controle/ControleEditora";
 
+/*
+Controle de recebimento das editoras
+*/
 
 export const controleEditora = new ControleEditora() 
  

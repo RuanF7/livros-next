@@ -6,6 +6,10 @@ import Menu from "../../componentes/Menu";
 
 import styles from "../styles/Home.module.css";
 
+/*
+Método GET, Obter e Excluir usando funções assíncronas e carregando
+*/
+
 const baseURL = "http://localhost:3000/api/livros";
 
 export default function LivroLista() {
@@ -44,6 +48,11 @@ export default function LivroLista() {
     obter();
     setCarregando(false);
   }, [carregando]);
+
+  
+  /*
+  Página de catalogo de livros com botão excluir
+  */
 
   return (
     <React.Fragment>

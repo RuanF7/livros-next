@@ -6,6 +6,10 @@ import Menu from "../../componentes/Menu";
 import { Editora } from "../../classes/modelo/Editora";
 import { redirect } from "next/dist/server/api-utils";
 
+/*
+Método Router, GET, POST, usando funções assíncronas e baseURL com JSON de editoras e livros cadastrados
+*/
+
 const LivroDados: NextPage = () => {
   const router = useRouter();
   const [titulo, setTitulo] = useState<string>("");
@@ -59,6 +63,10 @@ const LivroDados: NextPage = () => {
     setCarregando(false);
   }, [carregando]);
 
+  /*
+  Formulário de dados dos livros para serem enviados ao catálogo
+  */
+
   return (
     <React.Fragment>
       <Menu />
@@ -69,7 +77,6 @@ const LivroDados: NextPage = () => {
             cadastrarLivro(event);
           }}
         >
-          {/* Input Titulo: Inicio */}
           <div className="form-group">
             <label htmlFor="titulo">Título</label>
             <input
@@ -81,9 +88,7 @@ const LivroDados: NextPage = () => {
               placeholder="Titulo do livro"
             />
           </div>
-          {/* Input Titulo: Fim */}
 
-          {/* Text Area Resumo: Inicio */}
           <div className="form-group mt-2">
             <label htmlFor="resumo">Resumo</label>
             <textarea
@@ -94,9 +99,7 @@ const LivroDados: NextPage = () => {
               rows={3}
             ></textarea>
           </div>
-          {/* Text Area Resumo: Fim */}
 
-          {/* Select Editora: Inicio */}
           <div className="form-group mt-2">
             <label htmlFor="editora">Editora</label>
             <select
@@ -116,9 +119,7 @@ const LivroDados: NextPage = () => {
               })}
             </select>
           </div>
-          {/* Select Editora: Fim */}
 
-          {/* TextArea Autores: Inicio */}
           <div className="form-group mt-2">
             <label htmlFor="autores">Autores (1 por linha)</label>
             <textarea
@@ -131,7 +132,6 @@ const LivroDados: NextPage = () => {
               rows={3}
             ></textarea>
           </div>
-          {/* Text Area Autores: Fim */}
 
           <button type="submit" className="btn btn-primary mt-2">
             Salvar dados
